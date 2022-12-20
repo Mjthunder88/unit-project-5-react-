@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 function App() {
 
     const potentials = useSelector(selectPotentials)
-    console.log(potentials)
+    // console.log(potentials)
 
     return (
         <div className="App font-link">
