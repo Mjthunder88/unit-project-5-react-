@@ -62,6 +62,8 @@ button {
     background-color: var(--aquamarine);
     cursor: pointer;
     font-size: 1em;
+    margin: .5rem;
+    max-height: 6rem;
 }
 
 input {
@@ -70,6 +72,7 @@ input {
 
 img {
     max-width: 30vw;
+    max-height: 20vh;
 }
 
 td {
@@ -84,6 +87,9 @@ td {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem;
 }
 
 /*  -----------------

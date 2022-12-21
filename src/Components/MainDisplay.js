@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 
+import Overview from "./Overview";
+import Weather from "./Weather"
+import Symbols from "./Symbols";
+
 const MainDisplay = () => {
     const [view, setView] = useState("Overview");
     return (
@@ -10,6 +14,9 @@ const MainDisplay = () => {
                     Current Weather at Capitol
                 </button>
                 <button onClick={() => setView("Symbols")}>Symbols</button>
+                {view === "Overview" && <Overview />}
+                {view === "Weather" && <Weather />}
+                {view === "Symbols" && <Symbols />}
             </div>
         </div>
     );
