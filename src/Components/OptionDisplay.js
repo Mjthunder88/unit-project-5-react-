@@ -1,17 +1,28 @@
 import React from "react";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { selectPotentials } from "../redux/slices/potentialCountriesSlice";
+
+import { setDisplayCountry } from "../redux/slices/displayCountrySlice";
 
 const OptionDisplay = () => {
   const currentPotentials = useSelector(selectPotentials);
   console.log(currentPotentials, "logged in option display");
 
+  const dispatch = useDispatch();
+
   return (
     <div className="stack">
-      {currentPotentials.map((country) => {
+      {currentPotentials.map((country, index) => {
         return (
-          <h2 key={country.name.official} className="country-option">
+          <h2
+            key={country.name.official}
+            className="country-option"
+            onClick={() => {
+              dispatch(setDisplayCountry(currentPotentials[index]))
+            }
+            }
+          >
             {country.name.common}
           </h2>
         );
