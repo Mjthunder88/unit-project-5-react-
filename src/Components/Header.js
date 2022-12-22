@@ -7,7 +7,12 @@ import { deletePotentialCountries, setPotentialCountries } from "../redux/slices
 
 import { selectDisplay, deleteDisplayCountry } from "../redux/slices/displayCountrySlice";
 
+import { changeToLoadingStatus, notLoading } from "../redux/slices/loadingStateSlice";
+
+
+
 const Header = () => {
+
 
     const currentDisplay = useSelector(selectDisplay)
 
@@ -31,12 +36,14 @@ const Header = () => {
                 />
                 <button
                     onClick={() => {
+                        dispatch(changeToLoadingStatus());
                         axios
                             .get(`https://restcountries.com/v3.1/name/${input}`)
                             .then((res) => {
                                 console.log(res.data);
                                 dispatch(deleteDisplayCountry())
                                 dispatch(deletePotentialCountries())
+                                dispatch(notLoading())
                                 dispatch(setPotentialCountries(res.data))
                             })
                             .catch((err) => {

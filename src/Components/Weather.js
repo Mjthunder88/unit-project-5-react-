@@ -1,19 +1,27 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { selectDisplay } from "../redux/slices/displayCountrySlice";
+
+
+import { changeToLoadingStatus, notLoading } from "../redux/slices/loadingStateSlice";
+
+
 
 const Weather = () => {
   const [weather, setWeather] = useState();
 
   const display = useSelector(selectDisplay);
 
+  const dispatch = useDispatch()
+
   const latitude = display.capitalInfo.latlng[0];
 
   const longitude = display.capitalInfo.latlng[1];
 
   useEffect(() => {
+    dispatch(changeToLoadingStatus())
     const options = {
       method: "GET",
       url: "https://weatherapi-com.p.rapidapi.com/current.json",
@@ -23,17 +31,21 @@ const Weather = () => {
         "X-RapidAPI-Host": "weatherapi-com.p.rapidapi.com",
       },
     };
-
     axios
       .request(options)
       .then(function (response) {
         console.log(response.data);
         setWeather(response.data)
+        dispatch(notLoading())
       })
       .catch(function (error) {
         console.error(error);
       });
   }, [latitude, longitude]);            //! Why do we have to put the "?" in  the jsx? 
+                                        //* those are conditionals for checking information
+                                        //* it well check if its truthy or falsy /defined and then it will move to the next section 
+                                        //* This helps prevent the code from breaking because it will check first if there is a value there. 
+                                        //? ex: content ? ... : .... etc 
 
   return (
     <div>

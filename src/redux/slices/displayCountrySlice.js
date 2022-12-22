@@ -6,7 +6,7 @@ import initialCountry from '../../assets/initialCountry'
 
 
 export const displayCountrySlice = createSlice({
-    name: "displayCountry",
+    name: "displayedCountry",
     initialState: {
         value: initialCountry
     },
